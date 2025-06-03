@@ -1,15 +1,19 @@
 ---
-name: "❓ Question"
-about: Ask a question or request clarification about this project
-title: "[QUESTION] "
-labels: question
+name: Task / Enhancement
+about: Suggest a new task or improvement
+title: ""
+labels: enhancement, task
+assignees: ""
 ---
 
-**What is your question?**
-Please clearly state your question or what you need help with.
+**Description**
 
-**Context**
-Provide any context that might help others answer your question.
+Describe the task or enhancement you want to propose.
 
-**Additional information**
-Add any relevant screenshots, links, or details.
+**Why is this needed?**
+
+Explain why this task or enhancement is important.
+
+**Additional context**
+
+Add any other context or screenshots about the task here.
