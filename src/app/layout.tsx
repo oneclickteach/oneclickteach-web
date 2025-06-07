@@ -14,8 +14,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "One Click Teach", 
+  title: "One Click Teach",
   description: "Empower Language Teachers",
+  icons: {
+    icon: [
+      { url: '/favicon/favicon.ico', sizes: 'any' },
+      { url: '/favicon/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/favicon/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [
+      { url: '/favicon/apple-touch-icon.png', type: 'image/png' },
+    ],
+  },
+  manifest: '/favicon/site.webmanifest',
 };
 
 export default function RootLayout({
