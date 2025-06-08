@@ -25,6 +25,12 @@ export default function Header() {
           >
             Help
           </Link>
+          <Link
+            href="/admin"
+            className="text-sm font-medium text-foreground/60 transition-colors hover:text-foreground/80"
+          >
+            Admin
+          </Link>
         </nav>
         <div className="flex flex-initial items-center justify-end space-x-2">
           <ModeToggle />
