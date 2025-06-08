@@ -1,4 +1,8 @@
+
+// Third Party Imports
 import { create } from "zustand";
+
+// Types
 import { TeacherProfile } from "@/lib/types/teacher";
 
 interface TeacherProfileState {
@@ -41,7 +45,6 @@ export const useTeacherProfileStore = create<TeacherProfileState>((set) => ({
       set({ profile: updatedProfile });
       return true;
     } catch (error) {
-      console.error('Error updating profile:', error);
       set({ error: 'Failed to update profile' });
       return false;
     }
@@ -54,9 +57,7 @@ export const useTeacherProfileStore = create<TeacherProfileState>((set) => ({
       }
       const profile = await response.json();
       set({ profile, loading: false });
-      set({ profile, loading: false });
     } catch (error) {
-      console.error('Error fetching profile:', error);
       set({ error: 'Failed to fetch profile', loading: false });
     }
   }

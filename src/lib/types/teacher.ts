@@ -13,6 +13,13 @@ export interface TeachingResource {
   type?: 'link' | 'download' | 'video';
 }
 
+export interface SocialLinks {
+  linkedin: string;
+  twitter: string;
+  website: string;
+  github: string;
+}
+
 export interface TeacherProfile {
   id: string;
   name: string;
@@ -21,12 +28,7 @@ export interface TeacherProfile {
   bioSummary: string;
   teachingPhilosophy: string;
   contactEmail: string;
-  socialLinks: {
-    linkedin: string;
-    twitter: string;
-    website: string;
-    github: string;
-  };
+  socialLinks: SocialLinks;
   testimonials?: Testimonial[];
   resources: TeachingResource[];
   schedulingUrl?: string;
