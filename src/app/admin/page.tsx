@@ -4,15 +4,28 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 // Store
+import { useEffect } from 'react';
 import { useTeacherProfileStore } from '@/lib/store/useTeacherProfileStore';
+import { useTranslation } from '@/hooks/use-translation';
+import { useLanguageStore } from '@/lib/store/useLanguageStore';
 
 // Forms
 import { BasicInfoForm } from '@/components/admin/forms/BasicInfoForm';
 import { TeachingPhilosophyForm } from '@/components/admin/forms/TeachingPhilosophyForm';
 import { ContactSocialLinksForm } from '@/components/admin/forms/ContactSocialLinksForm';
+import LanguageManagement from '@/components/admin/LanguageManagement';
 
 export default function AdminProfilePage() {
   const profile = useTeacherProfileStore((state) => state.profile);
+  const { t } = useTranslation();
+  const { getSelectedLanguage, fetchLanguages } = useLanguageStore();
+  const selectedLanguage = getSelectedLanguage();
+  const selectedLanguageCode = selectedLanguage?.id || 'en'; // Default to English if no language selected
+
+  // Initialize languages on component mount
+  useEffect(() => {
+    fetchLanguages();
+  }, [fetchLanguages]);
 
   // The store initializes with mock data, so profile should ideally not be null here
   // after the initial client-side hydration. If it can be null, a robust loading state is good.
@@ -27,20 +40,24 @@ export default function AdminProfilePage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-10">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-          Manage Your Profile
-        </h1>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
+            {t('profile.title', selectedLanguageCode)}
+          </h1>
+        </div>
         <p className="mt-4 text-xl text-gray-600 dark:text-gray-300">
-          Update your personal information, teaching philosophy, contact details, and more.
+          {t('profile.subtitle', selectedLanguageCode)}
         </p>
       </header>
 
       <div className="grid gap-8 lg:gap-12">
+        {/* Languages Management Section */}
+        <LanguageManagement />
         {/* Basic Information Section (Placeholder) */}
         <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
           <CardHeader>
-            <CardTitle className="text-2xl">Basic Information</CardTitle>
-            <CardDescription>Update your name, tagline, bio, and profile picture URL.</CardDescription>
+            <CardTitle className="text-2xl">{t('profile.sections.basicInfo.title')}</CardTitle>
+            <CardDescription>{t('profile.sections.basicInfo.description')}</CardDescription>
           </CardHeader>
           <CardContent>
             <BasicInfoForm />
@@ -50,8 +67,8 @@ export default function AdminProfilePage() {
         {/* Teaching Philosophy Section (Placeholder) */}
         <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
           <CardHeader>
-            <CardTitle className="text-2xl">Teaching Philosophy</CardTitle>
-            <CardDescription>Share your unique approach to teaching.</CardDescription>
+            <CardTitle className="text-2xl">{t('profile.sections.teachingPhilosophy.title')}</CardTitle>
+            <CardDescription>{t('profile.sections.teachingPhilosophy.description')}</CardDescription>
           </CardHeader>
           <CardContent>
             <TeachingPhilosophyForm />

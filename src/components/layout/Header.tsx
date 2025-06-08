@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ModeToggle } from '@/components/toggle-mode';
 import Image from 'next/image';
+import { LanguageSelector } from "@/components/language-selector";
 
 export default function Header() {
   return (
@@ -33,6 +34,7 @@ export default function Header() {
           </Link>
         </nav>
         <div className="flex flex-initial items-center justify-end space-x-2">
+          <LanguageSelector />
           <ModeToggle />
         </div>
       </div>
