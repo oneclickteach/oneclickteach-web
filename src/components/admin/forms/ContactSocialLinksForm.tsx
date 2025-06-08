@@ -23,8 +23,8 @@ const contactSocialLinksFormSchema = z.object({
   socialLinks: z.object({
     linkedin: z.string().url({ message: "Please enter a valid URL for LinkedIn." }).optional().or(z.literal('')),
     twitter: z.string().url({ message: "Please enter a valid URL for Twitter/X." }).optional().or(z.literal('')),
-    website: z.string().url({ message: "Please enter a valid URL for your website." }).optional().or(z.literal('')),
-    github: z.string().url({ message: "Please enter a valid URL for GitHub." }).optional().or(z.literal('')),
+    telegram: z.string().url({ message: "Please enter a valid URL for Telegram." }).optional().or(z.literal('')),
+    whatsapp: z.string().url({ message: "Please enter a valid URL for WhatsApp." }).optional().or(z.literal('')),
   }).optional(),
 });
 
@@ -45,8 +45,8 @@ export function ContactSocialLinksForm() {
       socialLinks: {
         linkedin: profile?.socialLinks?.linkedin || "",
         twitter: profile?.socialLinks?.twitter || "",
-        website: profile?.socialLinks?.website || "",
-        github: profile?.socialLinks?.github || "",
+        telegram: profile?.socialLinks?.telegram || "",
+        whatsapp: profile?.socialLinks?.whatsapp || "",
       },
     },
     mode: "onChange",
@@ -59,8 +59,8 @@ export function ContactSocialLinksForm() {
       socialLinks: {
         linkedin: profile?.socialLinks?.linkedin || "",
         twitter: profile?.socialLinks?.twitter || "",
-        website: profile?.socialLinks?.website || "",
-        github: profile?.socialLinks?.github || "",
+        telegram: profile?.socialLinks?.telegram || "",
+        whatsapp: profile?.socialLinks?.whatsapp || "",
       },
     });
   }, [profile, form]);
@@ -126,30 +126,30 @@ export function ContactSocialLinksForm() {
         )}
       </div>
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Personal Website/Portfolio URL</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Telegram Profile URL</label>
         <input
           type="url"
-          placeholder="https://yourwebsite.com"
-          {...form.register("socialLinks.website")}
+          placeholder="https://t.me/yourhandle"
+          {...form.register("socialLinks.telegram")}
           className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
         />
-        {form.formState.errors.socialLinks?.website && (
+        {form.formState.errors.socialLinks?.telegram && (
           <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-            {form.formState.errors.socialLinks?.website.message}
+            {form.formState.errors.socialLinks?.telegram.message}
           </p>
         )}
       </div>
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">GitHub Profile URL (Optional)</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">WhatsApp Profile URL (Optional)</label>
         <input
           type="url"
-          placeholder="https://github.com/yourusername"
-          {...form.register("socialLinks.github")}
+          placeholder="https://wa.me/yournumber"
+          {...form.register("socialLinks.whatsapp")}
           className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
         />
-        {form.formState.errors.socialLinks?.github && (
+        {form.formState.errors.socialLinks?.whatsapp && (
           <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-            {form.formState.errors.socialLinks?.github.message}
+            {form.formState.errors.socialLinks?.whatsapp.message}
           </p>
         )}
       </div>

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ModeToggle } from '@/components/toggle-mode';
+import Image from 'next/image';
 
 export default function Header() {
   return (
@@ -9,8 +10,7 @@ export default function Header() {
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <nav className="flex flex-1 items-center space-x-4 lg:space-x-6">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            {/* You can add a logo here if you have one */}
-            {/* <Image src="/logo.svg" alt="OneClickTeach Logo" width={32} height={32} /> */}
+            <Image src="/svg/OneClickTeach.svg" alt="OneClickTeach Logo" width={32} height={32} />
             <span className="font-bold sm:inline-block">OneClickTeach</span>
           </Link>
           <Link

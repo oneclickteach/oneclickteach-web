@@ -1,7 +1,12 @@
 'use client';
 
-import { useTeacherProfileStore } from '@/lib/store/useTeacherProfileStore';
+// UI Components
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
+// Store
+import { useTeacherProfileStore } from '@/lib/store/useTeacherProfileStore';
+
+// Forms
 import { BasicInfoForm } from '@/components/admin/forms/BasicInfoForm';
 import { TeachingPhilosophyForm } from '@/components/admin/forms/TeachingPhilosophyForm';
 import { ContactSocialLinksForm } from '@/components/admin/forms/ContactSocialLinksForm';

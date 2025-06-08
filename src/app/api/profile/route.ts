@@ -24,10 +24,10 @@ const teacherProfileSchema = z.object({
   teachingPhilosophy: z.string(),
   contactEmail: z.string(),
   socialLinks: z.object({
-    linkedin: z.string(),
-    twitter: z.string(),
-    website: z.string(),
-    github: z.string()
+    linkedin: z.string().optional(),
+    twitter: z.string().optional(),
+    telegram: z.string().optional(),
+    whatsapp: z.string().optional()
   }),
   testimonials: z.array(z.object({
     id: z.string(),

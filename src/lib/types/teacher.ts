@@ -14,10 +14,10 @@ export interface TeachingResource {
 }
 
 export interface SocialLinks {
-  linkedin: string;
-  twitter: string;
-  website: string;
-  github: string;
+  linkedin?: string;
+  twitter?: string;
+  telegram?: string;
+  whatsapp?: string;
 }
 
 export interface TeacherProfile {
