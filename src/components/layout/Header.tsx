@@ -7,7 +7,7 @@ import Image from 'next/image';
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-screen-2xl items-center">
+      <div className="flex h-14 items-center w-full px-8">
         <nav className="flex flex-1 items-center space-x-4 lg:space-x-6">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Image src="/svg/OneClickTeach.svg" alt="OneClickTeach Logo" width={32} height={32} />
