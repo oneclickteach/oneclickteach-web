@@ -4,8 +4,11 @@ import Link from 'next/link';
 import { ModeToggle } from '@/components/toggle-mode';
 import Image from 'next/image';
 import { LanguageSelector } from "@/components/language-selector";
+import { useAuthStore } from '@/lib/store/useAuthStore';
 
 export default function Header() {
+  const { isAuthenticated, logout } = useAuthStore();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-14 items-center w-full px-8">
@@ -34,6 +37,14 @@ export default function Header() {
           </Link>
         </nav>
         <div className="flex flex-initial items-center justify-end space-x-2">
+          {isAuthenticated && (
+            <button
+              onClick={logout}
+              className="text-sm font-medium text-foreground/60 transition-colors hover:text-foreground/80"
+            >
+              Logout
+            </button>
+          )}
           <LanguageSelector />
           <ModeToggle />
         </div>
