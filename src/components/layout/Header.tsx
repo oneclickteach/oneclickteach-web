@@ -35,6 +35,12 @@ export default function Header() {
           >
             Admin
           </Link>
+          <Link
+            href="/dashboard"
+            className="text-sm font-medium text-foreground/60 transition-colors hover:text-foreground/80"
+          >
+            Dashboard
+          </Link>
         </nav>
         <div className="flex flex-initial items-center justify-end space-x-2">
           {isAuthenticated && (

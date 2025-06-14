@@ -26,10 +26,6 @@ export async function middleware(request: NextRequest) {
   // If it's a protected route and no token in request headers
   if (isProtectedRoute) {
     const isAuth = await isAuthenticated(request);
-    console.log({
-      stage: '1 --------------------------------',
-      isAuth
-    })
     if (!isAuth) {
       const url = new URL('/login', request.url);
       url.searchParams.set('redirect', request.nextUrl.pathname);
