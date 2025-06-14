@@ -5,6 +5,7 @@ import { ModeToggle } from '@/components/toggle-mode';
 import Image from 'next/image';
 import { LanguageSelector } from "@/components/language-selector";
 import { useAuthStore } from '@/lib/store/useAuthStore';
+import { LogOut } from 'lucide-react';
 
 export default function Header() {
   const { isAuthenticated, logout } = useAuthStore();
@@ -46,8 +47,10 @@ export default function Header() {
           {isAuthenticated && (
             <button
               onClick={logout}
-              className="text-sm font-medium text-foreground/60 transition-colors hover:text-foreground/80"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-background text-foreground hover:bg-destructive hover:text-white h-9 px-4 py-2"
+              aria-label="Logout"
             >
+              <LogOut className="mr-2 h-4 w-4" />
               Logout
             </button>
           )}
