@@ -13,10 +13,8 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
 // Store
-import { useTeacherProfileStore } from "@/lib/store/useTeacherProfileStore";
-
-// Types
-import { TeacherProfile } from "@/lib/types/teacher";
+import { useSettingStore } from "@/lib/store/useSettingStore";
+import { SettingInterface } from "@/lib/interfaces";
 
 const teachingPhilosophyFormSchema = z.object({
   teachingPhilosophy: z.string().min(10, {
@@ -30,16 +28,13 @@ type TeachingPhilosophyFormValues = z.infer<typeof teachingPhilosophyFormSchema>
 
 export function TeachingPhilosophyForm() {
   // Store
-  const getProfile = useCallback(() => useTeacherProfileStore.getState().profile, []);
-  const getUpdateProfileInfo = useCallback(() => useTeacherProfileStore.getState().updateProfileInfo, []);
-  const profile = getProfile();
-  const updateProfileInfo = getUpdateProfileInfo();
+  const { settings, updateTeachingPhilosophy } = useSettingStore((state) => state);
 
   // Form
   const form = useForm<TeachingPhilosophyFormValues>({
     resolver: zodResolver(teachingPhilosophyFormSchema),
     defaultValues: {
-      teachingPhilosophy: profile?.teachingPhilosophy || "",
+      teachingPhilosophy: settings?.teaching_philosophy || "",
     },
     mode: "onChange",
   });
@@ -47,18 +42,22 @@ export function TeachingPhilosophyForm() {
   // Update form when profile changes
   useEffect(() => {
     form.reset({
-      teachingPhilosophy: profile?.teachingPhilosophy || "",
+      teachingPhilosophy: settings?.teaching_philosophy || "",
     });
-  }, [profile, form]);
+  }, [settings, form]);
 
-  function onSubmit(data: TeachingPhilosophyFormValues) {
-    const updatedData: Partial<TeacherProfile> = {
-      teachingPhilosophy: data.teachingPhilosophy,
+  async function onSubmit(data: TeachingPhilosophyFormValues) {
+    const updatedData: Partial<SettingInterface> = {
+      teaching_philosophy: data.teachingPhilosophy,
     };
-    updateProfileInfo(updatedData);
-    toast.success("Teaching Philosophy Updated", {
-      description: "Your teaching philosophy has been successfully updated.",
-    });
+
+    const success = await updateTeachingPhilosophy(updatedData as SettingInterface);
+
+    if (success) {
+      toast.success("Teaching Philosophy Updated", {
+        description: "Your teaching philosophy has been successfully updated.",
+      });
+    }
   }
 
   return (

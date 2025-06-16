@@ -13,10 +13,9 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
 // Store
-import { useTeacherProfileStore } from "@/lib/store/useTeacherProfileStore";
-
-// Types
-import { SocialLinks, TeacherProfile } from "@/lib/types/teacher";
+import { useSettingStore } from "@/lib/store/useSettingStore";
+import { SettingInterface } from "@/lib/interfaces";
+import { SocialLinkInterface } from "@/lib/interfaces";
 
 const contactSocialLinksFormSchema = z.object({
   contactEmail: z.string().email({ message: "Please enter a valid email address." }).optional().or(z.literal('')),
@@ -32,21 +31,18 @@ type ContactSocialLinksFormValues = z.infer<typeof contactSocialLinksFormSchema>
 
 export function ContactSocialLinksForm() {
   // Store
-  const getProfile = useCallback(() => useTeacherProfileStore.getState().profile, []);
-  const getUpdateProfileInfo = useCallback(() => useTeacherProfileStore.getState().updateProfileInfo, []);
-  const profile = getProfile();
-  const updateProfileInfo = getUpdateProfileInfo();
+  const { settings, updateSocialLinks } = useSettingStore((state) => state);
 
   // Form
   const form = useForm<ContactSocialLinksFormValues>({
     resolver: zodResolver(contactSocialLinksFormSchema),
     defaultValues: {
-      contactEmail: profile?.contactEmail || "",
+      contactEmail: settings?.contact_email || "",
       socialLinks: {
-        linkedin: profile?.socialLinks?.linkedin || "",
-        twitter: profile?.socialLinks?.twitter || "",
-        telegram: profile?.socialLinks?.telegram || "",
-        whatsapp: profile?.socialLinks?.whatsapp || "",
+        linkedin: settings?.social_links?.linkedin || "",
+        twitter: settings?.social_links?.twitter || "",
+        telegram: settings?.social_links?.telegram || "",
+        whatsapp: settings?.social_links?.whatsapp || "",
       },
     },
     mode: "onChange",
@@ -55,25 +51,29 @@ export function ContactSocialLinksForm() {
   // Update form when profile changes
   useEffect(() => {
     form.reset({
-      contactEmail: profile?.contactEmail || "",
+      contactEmail: settings?.contact_email || "",
       socialLinks: {
-        linkedin: profile?.socialLinks?.linkedin || "",
-        twitter: profile?.socialLinks?.twitter || "",
-        telegram: profile?.socialLinks?.telegram || "",
-        whatsapp: profile?.socialLinks?.whatsapp || "",
+        linkedin: settings?.social_links?.linkedin || "",
+        twitter: settings?.social_links?.twitter || "",
+        telegram: settings?.social_links?.telegram || "",
+        whatsapp: settings?.social_links?.whatsapp || "",
       },
     });
-  }, [profile, form]);
+  }, [settings, form]);
 
-  function onSubmit(data: ContactSocialLinksFormValues) {
-    const updatedData: Partial<TeacherProfile> = {
-      contactEmail: data.contactEmail,
-      socialLinks: data.socialLinks as SocialLinks,
+  async function onSubmit(data: ContactSocialLinksFormValues) {
+    const updatedData: Partial<SettingInterface> = {
+      contact_email: data.contactEmail,
+      social_links: data.socialLinks as SocialLinkInterface,
     };
-    updateProfileInfo(updatedData);
-    toast.success("Contact Info Updated", {
-      description: "Your contact details and social links have been updated.",
-    });
+
+    const success = await updateSocialLinks(updatedData as SettingInterface);
+
+    if (success) {
+      toast.success("Contact Info Updated", {
+        description: "Your contact details and social links have been updated.",
+      });
+    }
   }
 
   return (

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { authApi, api } from '@/services/auth';
+import { authApi, api } from '@/services';
 
 // Delete Auth cookie
 const deleteAuthCookie = () => {
@@ -34,7 +34,7 @@ const callBackendLogout = async () => {
   } catch (error) { }
 };
 
-interface AuthState {
+export interface AuthState {
   user: any | null;
   isAuthenticated: boolean;
   loading: boolean;

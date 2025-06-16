@@ -13,10 +13,8 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 
 // Store
-import { useTeacherProfileStore } from "@/lib/store/useTeacherProfileStore";
-
-// Types
-import { TeacherProfile } from "@/lib/types/teacher";
+import { useSettingStore } from "@/lib/store/useSettingStore";
+import { SettingInterface } from "@/lib/interfaces";
 
 const basicInfoFormSchema = z.object({
   name: z.string().min(2, {
@@ -37,19 +35,16 @@ type BasicInfoFormValues = z.infer<typeof basicInfoFormSchema>;
 
 export function BasicInfoForm() {
   // Store
-  const getProfile = useCallback(() => useTeacherProfileStore.getState().profile, []);
-  const getUpdateProfileInfo = useCallback(() => useTeacherProfileStore.getState().updateProfileInfo, []);
-  const profile = getProfile();
-  const updateProfileInfo = getUpdateProfileInfo();
+  const { settings, updateBasicInfo } = useSettingStore((state) => state);
 
   // Form
   const form = useForm<BasicInfoFormValues>({
     resolver: zodResolver(basicInfoFormSchema),
     defaultValues: {
-      name: profile?.name || "",
-      tagline: profile?.tagline || "",
-      profilePictureUrl: profile?.profilePictureUrl || undefined,
-      bioSummary: profile?.bioSummary || "",
+      name: settings?.name || "",
+      tagline: settings?.tagline || "",
+      profilePictureUrl: settings?.profile_picture_url || undefined,
+      bioSummary: settings?.bio_summary || "",
     },
     mode: "onChange",
   });
@@ -57,25 +52,28 @@ export function BasicInfoForm() {
   // Reset form when profile changes
   useEffect(() => {
     form.reset({
-      name: profile?.name || "",
-      tagline: profile?.tagline || "",
-      profilePictureUrl: profile?.profilePictureUrl || undefined,
-      bioSummary: profile?.bioSummary || "",
+      name: settings?.name || "",
+      tagline: settings?.tagline || "",
+      profilePictureUrl: settings?.profile_picture_url || undefined,
+      bioSummary: settings?.bio_summary || "",
     });
-  }, [profile, form]);
+  }, [settings, form]);
 
-  function onSubmit(data: BasicInfoFormValues) {
-    const updatedData: Partial<TeacherProfile> = {
+  async function onSubmit(data: BasicInfoFormValues) {
+    const updatedData: Partial<SettingInterface> = {
       name: data.name,
       tagline: data.tagline,
-      profilePictureUrl: data.profilePictureUrl || undefined,
-      bioSummary: data.bioSummary
+      profile_picture_url: data.profilePictureUrl || undefined,
+      bio_summary: data.bioSummary
     };
 
-    updateProfileInfo(updatedData);
-    toast.success("Profile Updated", {
-      description: "Your basic information has been successfully updated.",
-    });
+    const success = await updateBasicInfo(updatedData as SettingInterface);
+
+    if (success) {
+      toast.success("Basic Info Updated", {
+        description: "Your basic information has been successfully updated.",
+      });
+    }
   }
 
   return (

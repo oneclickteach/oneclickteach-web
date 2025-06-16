@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { ModeToggle } from '@/components/toggle-mode';
 import Image from 'next/image';
-import { LanguageSelector } from "@/components/language-selector";
 import { useAuthStore } from '@/lib/store/useAuthStore';
 import { LogOut } from 'lucide-react';
 
@@ -54,7 +53,6 @@ export default function Header() {
               Logout
             </button>
           )}
-          <LanguageSelector />
           <ModeToggle />
         </div>
       </div>

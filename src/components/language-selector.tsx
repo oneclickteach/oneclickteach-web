@@ -8,18 +8,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useLanguageStore } from "@/lib/store/useLanguageStore";
-import { Language } from "@/lib/types/language";
+import { useSettingStore } from "@/lib/store";
+import { LanguageInterface } from "@/lib/interfaces";
 
 export function LanguageSelector() {
-  const { languages: languageMap, selectedLanguage, fetchLanguages, setSelectedLanguage } = useLanguageStore();
-  const languages = Object.values(languageMap) as Language[];
+  const { settings, getSettings, setSelectedLanguage, selectedLanguage } = useSettingStore((state) => state);
+  const languages = Object.values(settings?.languages) as LanguageInterface[];
 
   useEffect(() => {
-    fetchLanguages().catch(console.error);
-  }, []);
+    getSettings();
+  }, [getSettings]);
 
-  const handleLanguageChange = (lang: Language) => {
+  const handleLanguageChange = (lang: LanguageInterface) => {
     setSelectedLanguage(lang);
     // Update document direction for RTL languages
     if (lang.direction === 'rtl') {
@@ -33,19 +33,19 @@ export function LanguageSelector() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          {selectedLanguage?.flagEmoji || '🌐'}
+          {selectedLanguage?.flag_emoji || '🌐'}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {languages
-          .filter((lang: Language) => lang.isActive)
-          .map((lang: Language) => (
+          .filter((lang: LanguageInterface) => lang.is_active)
+          .map((lang: LanguageInterface) => (
             <DropdownMenuItem
               key={lang.id}
               onClick={() => handleLanguageChange(lang)}
               className="flex items-center gap-2"
             >
-              {lang.flagEmoji} {lang.name}
+              {lang.flag_emoji} {lang.name}
             </DropdownMenuItem>
           ))}
       </DropdownMenuContent>
