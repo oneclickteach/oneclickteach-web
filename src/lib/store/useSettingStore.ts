@@ -19,7 +19,7 @@ export interface SettingState {
     setSelectedLanguage: (language: LanguageInterface) => void;
 }
 
-export const useSettingStore = create<SettingState>((set, get) => ({
+export const useSettingStore = create<SettingState>((set) => ({
     settings: DEFAULT_SETTING,
     loading: false,
     error: null,
@@ -30,6 +30,7 @@ export const useSettingStore = create<SettingState>((set, get) => ({
             const settings = await settingApi.getSettings();
             set({ settings, loading: false });
         } catch (error) {
+            console.log(error)
             set({ loading: false, error: 'Failed to fetch settings' });
         }
     },
@@ -40,6 +41,7 @@ export const useSettingStore = create<SettingState>((set, get) => ({
             set({ settings, loading: false });
             return true;
         } catch (error) {
+            console.log(error)
             set({ loading: false, error: 'Failed to update settings' });
             return false;
         }
@@ -51,6 +53,7 @@ export const useSettingStore = create<SettingState>((set, get) => ({
             set({ settings, loading: false });
             return true;
         } catch (error) {
+            console.log(error)
             set({ loading: false, error: 'Failed to update basic info' });
             return false;
         }
@@ -62,6 +65,7 @@ export const useSettingStore = create<SettingState>((set, get) => ({
             set({ settings, loading: false });
             return true;
         } catch (error) {
+            console.log(error)
             set({ loading: false, error: 'Failed to update teaching philosophy' });
             return false;
         }
@@ -73,6 +77,7 @@ export const useSettingStore = create<SettingState>((set, get) => ({
             set({ settings, loading: false });
             return true;
         } catch (error) {
+            console.log(error)
             set({ loading: false, error: 'Failed to update social links' });
             return false;
         }
@@ -84,6 +89,7 @@ export const useSettingStore = create<SettingState>((set, get) => ({
             set({ settings, loading: false });
             return true;
         } catch (error) {
+            console.log(error)
             set({ loading: false, error: 'Failed to update testimonials' });
             return false;
         }
@@ -95,6 +101,7 @@ export const useSettingStore = create<SettingState>((set, get) => ({
             set({ settings, loading: false });
             return true;
         } catch (error) {
+            console.log(error)
             set({ loading: false, error: 'Failed to update resources' });
             return false;
         }
@@ -106,6 +113,7 @@ export const useSettingStore = create<SettingState>((set, get) => ({
             set({ settings, loading: false });
             return true;
         } catch (error) {
+            console.log(error)
             set({ loading: false, error: 'Failed to update scheduling url' });
             return false;
         }

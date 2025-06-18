@@ -32,11 +32,12 @@ export function LoginForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+
     try {
       await login(email, password);
       router.push('/dashboard');
     } catch (error) {
+      console.log(error)
       setError('Invalid credentials');
     }
   };
@@ -91,7 +92,7 @@ export function LoginForm() {
           </form>
           <div className="text-center mt-4">
             <Link href="/signup" className="text-sm text-primary hover:underline">
-              Don't have an account? Sign up
+              {"Don't have an account? Sign up"}
             </Link>
           </div>
         </CardContent>

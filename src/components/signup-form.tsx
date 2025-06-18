@@ -21,7 +21,7 @@ export function SignupForm({
         <CardHeader>
           <CardTitle>Create an account</CardTitle>
           <CardDescription>
-            Let's get started. Fill in the details below to create your account.
+            {"Let's get started. Fill in the details below to create your account."}
           </CardDescription>
         </CardHeader>
         <CardContent>

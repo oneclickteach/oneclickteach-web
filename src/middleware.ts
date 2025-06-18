@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
 
 // Helper function to check if user is authenticated
-const isAuthenticated = async (request: NextRequest) => {
+const isAuthenticated = async (_request: NextRequest) => {
   const cookieStore = await cookies();
   const token = cookieStore.get('Authentication')?.value;
   return !!token;

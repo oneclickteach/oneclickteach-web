@@ -17,4 +17,5 @@ export const DEFAULT_SETTING: SettingInterface = {
     testimonials: [],
     resources: [],
     scheduling_url: undefined,
+    languages: []
 };

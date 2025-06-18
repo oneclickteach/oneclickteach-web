@@ -1,10 +1,14 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 
+interface ErrorResponse {
+  message?: string | string[];
+  [key: string]: unknown;
+}
+
 export interface ApiAxiosRequestConfig extends AxiosRequestConfig {
   silent?: boolean;
 }
-
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
@@ -22,7 +26,7 @@ api.interceptors.response.use(
     const silent = config?.silent;
 
     if (!silent) {
-      const data = error?.response?.data as any;
+      const data = error?.response?.data as ErrorResponse;
       const status = error?.response?.status;
 
       // Customize how you handle different status codes

@@ -13,7 +13,7 @@ import { TeachingPhilosophyForm } from '@/components/admin/forms/TeachingPhiloso
 import { ContactSocialLinksForm } from '@/components/admin/forms/ContactSocialLinksForm';
 
 export default function AdminProfilePage() {
-  const { settings, selectedLanguage, setSelectedLanguage, getSettings } = useSettingStore((state) => state);
+  const { settings, getSettings } = useSettingStore((state) => state);
 
   useEffect(() => {
     getSettings();

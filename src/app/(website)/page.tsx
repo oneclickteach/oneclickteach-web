@@ -97,7 +97,7 @@ export default function TeacherProfilePage() {
                     {testimonial.created_at && <CardDescription>{new Date(testimonial.created_at).toLocaleDateString()}</CardDescription>}
                   </CardHeader>
                   <CardContent className="flex-grow">
-                    <p className="italic text-card-foreground/90">"{testimonial.quote}"</p>
+                    <p className="italic text-card-foreground/90">{testimonial.quote}</p>
                   </CardContent>
                 </Card>
               ))}

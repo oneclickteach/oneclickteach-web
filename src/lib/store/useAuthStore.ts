@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { authApi, api } from '@/services';
+import { UserInterface } from '../interfaces';
 
 // Delete Auth cookie
 const deleteAuthCookie = () => {
@@ -10,32 +11,40 @@ const deleteAuthCookie = () => {
     // Delete cookie from root path
     document.cookie = `Authentication=; Max-Age=0; path=/; domain=${window.location.hostname}`;
 
-  } catch (error) { }
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 // Delete Auth API headers
 const deleteAuthApiHeaders = () => {
   try {
     delete api.defaults.headers.common['Authorization'];
-  } catch (error) { }
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 // Set Auth API headers
 const setAuthApiHeaders = (token: string) => {
   try {
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  } catch (error) { }
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 // Call backend logout endpoint
 const callBackendLogout = async () => {
   try {
     await authApi.logout();
-  } catch (error) { }
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 export interface AuthState {
-  user: any | null;
+  user: UserInterface | null;
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;

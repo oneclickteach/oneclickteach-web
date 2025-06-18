@@ -32,7 +32,7 @@ export default function HelpPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-2">Contact Support</h2>
           <p>
-            If you need further assistance, please don't hesitate to reach out to our support team at support@oneclickteach.example.com.
+            {"If you need further assistance, please don't hesitate to reach out to our support team at support@oneclickteach.example.com."}
           </p>
         </section>
       </div>
