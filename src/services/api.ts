@@ -1,3 +1,4 @@
+import { BaseApiUrl } from '@/configs';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 
@@ -11,7 +12,7 @@ export interface ApiAxiosRequestConfig extends AxiosRequestConfig {
 }
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  baseURL: BaseApiUrl,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

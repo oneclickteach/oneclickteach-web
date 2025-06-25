@@ -1,0 +1,8 @@
+node_modules
+.next
+pnpm-lock.yaml
+*.log
+Dockerfile
+.dockerignore
+.env*
+.git
