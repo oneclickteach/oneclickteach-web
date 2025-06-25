@@ -1,4 +1,4 @@
-import { BaseApiUrl } from '@/configs';
+import { getApiBaseUrl } from '@/lib/config';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 
@@ -12,7 +12,7 @@ export interface ApiAxiosRequestConfig extends AxiosRequestConfig {
 }
 
 export const api = axios.create({
-  baseURL: BaseApiUrl,
+  baseURL: getApiBaseUrl(),
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
