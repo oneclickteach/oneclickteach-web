@@ -1,8 +1,16 @@
 node_modules
 .next
-pnpm-lock.yaml
 *.log
 Dockerfile
 .dockerignore
 .env*
 .git
+
+*.tsbuildinfo
+.vscode
+.idea
+.gitignore
+.DS_Store
+.pnpm-store
+.pnpm-debug.log
+
