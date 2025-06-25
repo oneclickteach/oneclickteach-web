@@ -12,11 +12,19 @@ export interface ApiAxiosRequestConfig extends AxiosRequestConfig {
 }
 
 export const api = axios.create({
-  baseURL: getApiBaseUrl(),
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
+});
+
+// Add request interceptor to set baseURL dynamically
+api.interceptors.request.use((config) => {
+  // Set baseURL on each request to ensure we have the latest config
+  if (!config.baseURL) {
+    config.baseURL = getApiBaseUrl();
+  }
+  return config;
 });
 
 // Response error interceptor
