@@ -15,11 +15,11 @@ export default function TeacherProfilePage() {
   const { settings, loading, error } = useSettingStore((state) => state);
 
   if (loading) {
-    return <div className="flex justify-center items-center min-h-screen">Loading profile...</div>;
+    return <div className="flex justify-center items-center min-h-screen">Loading profile...</div>
   }
 
   if (error) {
-    return <div className="flex justify-center items-center min-h-screen text-red-500">{error}</div>;
+    return <div className="flex justify-center items-center min-h-screen text-red-500">{error}</div>
   }
 
   return (
@@ -28,14 +28,17 @@ export default function TeacherProfilePage() {
         {/* Hero/Profile Section */}
         <section className="text-center mb-12 md:mb-16 pt-8 md:pt-12">
           <div className="mb-6">
-            <Image
-              src={settings?.profile_picture_url}
-              alt={settings?.name}
-              width={150}
-              height={150}
-              className="rounded-full mx-auto border-4 border-primary shadow-lg object-cover"
-              priority
-            />
+            {
+              settings?.profile_picture_url ?
+                <Image
+                  src={settings?.profile_picture_url}
+                  alt={settings?.name}
+                  width={150}
+                  height={150}
+                  className="rounded-full mx-auto border-4 border-primary shadow-lg object-cover"
+                  priority
+                /> : <div></div>
+            }
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">
             {settings?.name}

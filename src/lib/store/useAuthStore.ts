@@ -49,7 +49,7 @@ export interface AuthState {
   loading: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string) => Promise<void>;
+  signup: (email: string, password: string, first_name: string, last_name: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -77,10 +77,10 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      signup: async (email: string, password: string) => {
+      signup: async (email: string, password: string, first_name: string, last_name: string) => {
         try {
           set({ loading: true, error: null });
-          await authApi.signup(email, password);
+          await authApi.signup(email, password, first_name, last_name);
           await get().login(email, password);
         } catch (error) {
           set({ loading: false, error: 'Failed to create account' });

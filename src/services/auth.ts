@@ -6,8 +6,8 @@ export const authApi = {
     return response.data;
   },
 
-  signup: async (email: string, password: string) => {
-    const response = await api.post('/auth/signup', { email, password });
+  signup: async (email: string, password: string, first_name: string, last_name: string) => {
+    const response = await api.post('/auth/signup', { email, password, first_name, last_name });
     return response.data;
   },
 
