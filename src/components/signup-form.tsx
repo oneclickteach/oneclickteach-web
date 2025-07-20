@@ -68,7 +68,12 @@ export function SignupForm() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
+
             <div className="flex flex-col gap-6">
+              {error && (
+                <div className="text-red-500 text-sm">{error}</div>
+              )}
+
               {/* <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2"> */}
               <div className="flex gap-4">
 
