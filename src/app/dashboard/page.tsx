@@ -37,6 +37,7 @@ export default function TeacherProfilePage() {
                   height={150}
                   className="rounded-full mx-auto border-4 border-primary shadow-lg object-cover"
                   priority
+                  unoptimized
                 /> : <div></div>
             }
           </div>
