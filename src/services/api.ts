@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from '@/lib/config';
+import { getRuntimeConfig } from '@/lib/config';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 
@@ -19,11 +19,10 @@ export const api = axios.create({
 });
 
 // Add request interceptor to set baseURL dynamically
-api.interceptors.request.use((config) => {
-  // Set baseURL on each request to ensure we have the latest config
-  if (!config.baseURL) {
-    config.baseURL = getApiBaseUrl();
-  }
+api.interceptors.request.use(async (config) => {
+  const { API_BASE_URL } = await getRuntimeConfig();
+
+  config.baseURL = API_BASE_URL ?? '';
   return config;
 });
 
